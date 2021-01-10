@@ -1,32 +1,46 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = Post.all
+    if params[:author_id]
+      @posts = Author.find(params[:author_id]).posts
+    else
+      @posts = Post.all
+    end
   end
 
   def show
     @post = Post.find(params[:id])
-  end
+  end 
+  
 
-  def new
-    @post = Post.new
-  end
+  # Step 1 - Routes
+  # def index
+  #   @posts = Post.all
+  # end
 
-  def create
-    @post = Post.new(post_params)
-    @post.save
-    redirect_to post_path(@post)
-  end
+  # def show
+  #   @post = Post.find(params[:id])
+  # end
 
-  def update
-    @post = Post.find(params[:id])
-    @post.update(post_params)
-    redirect_to post_path(@post)
-  end
+  # def new
+  #   @post = Post.new
+  # end
 
-  def edit
-    @post = Post.find(params[:id])
-  end
+  # def create
+  #   @post = Post.new(post_params)
+  #   @post.save
+  #   redirect_to post_path(@post)
+  # end
+
+  # def update
+  #   @post = Post.find(params[:id])
+  #   @post.update(post_params)
+  #   redirect_to post_path(@post)
+  # end
+
+  # def edit
+  #   @post = Post.find(params[:id])
+  # end
 
 private
 
